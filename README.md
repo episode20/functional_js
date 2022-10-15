@@ -1,5 +1,6 @@
 
 ## 함수형 자바스크립트 프로그래밍
+- 강의자료 https://github.com/indongyoo/functional-javascript
 
 # 요약
 - 함수를 작게 만듬
