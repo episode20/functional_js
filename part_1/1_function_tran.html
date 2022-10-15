@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>함수형으로 전환 예제</title>
+  <script src="../js/_.js"></script>
+</head>
+<body>
+  <script>
+
+    // 명령형 코드
+    var tmpUsers = [];
+    for(var i=0;i<users.length;i++){
+      if(users[i].age>=30){
+        tmpUsers.push(users[i]);
+      }
+    }
+    console.log(tmpUsers);
+
+    var names = [];
+    for(var i=0;i<tmpUsers.length;i++){
+      names.push(tmpUsers[i].name);
+    }
+    console.log(names);
+
+    var tmpUsers = [];
+    for(var i=0;i<users.length;i++){
+      if(users[i].age < 30){
+        tmpUsers.push(users[i]);
+      }
+    }
+    console.log(tmpUsers);
+
+    var ages = [];
+    for(var i=0;i<tmpUsers.length;i++){
+      ages.push(tmpUsers[i].age);
+    }
+    console.log(ages);
+    
+    // 함수형 스타일로 변환 _filter, _map 
+
+    // 응용형 함수 (함수를 인자로 받음)
+    // 고차 함수 (함수를 인자로 받거나, 리턴하거나, 실행함)
+    console.log(
+      _filter(users, function(user){return user.age>=30})
+    );
+    console.log(
+      _filter(users, function(user){return user.age<30})
+    );
+  
+    console.log(_filter([1,2,3,4], function(num){ return num % 2; }));
+    console.log(_filter([1,2,3,4], function(num){ return !(num % 2); }));
+
+    var over_30 = _filter(users, function(user){return user.age>=30});
+    console.log(over_30);
+    var names = _map(over_30, function(user){
+      return user.name;
+    });
+    console.log(names)
+
+    var under_30 = _filter(users, function(user){return user.age<30});
+    var ages = _map(over_30, function(user){
+      return user.age;
+    });
+    console.log(ages);
+    console.log(_map([1,2,3], function(num){return num*2}));
+
+
+    // 대입문 대신 함수의 중첩을 통해 작성 (코드 중간에 변화의 여지를 차단)
+    console.log(_map(
+      _filter(users, function(user){return user.age>=30}),
+      function(user){return user.name}
+    ));
+
+    // array like 자료형도 사용가능
+    console.log(document.querySelectorAll('*'));    
+    console.log(_map(document.querySelectorAll('*'), function(node){
+      return node.nodeName;
+    }));
+
+  </script>
+</body>
+</html>

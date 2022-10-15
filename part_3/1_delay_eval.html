@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>컬렉션 중심-map, values, pluck</title>
+  <script src="../js/partial.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * 지연평가 <-> 염격한 평가 (순서에 맞게 모든 value를 확인)
+     * 1. 지연평가를 시작 시키고 유지시키는(이어가는) 함수
+     *  map,
+     *  filter, reject
+     * 2. 끝을 내는 함수
+     *  take,
+     *  some, every, find
+     * */
+    
+    // 지연평가의 샘플
+    var mi = 0;
+    var fi = 0;
+    _.go(
+      _.range(100),
+      _.map(function(val){
+        ++mi;
+        return val * val;
+      }),
+      _.filter(function(val){
+        ++fi;
+        return val %2;
+      }),
+      _.take(5),
+      console.log
+    )
+    // mapper 함수가 100번 샐행됨.
+    console.log(mi,fi)
+
+    // 지연평가 적용
+    // 최종 필요한 5개까지만 추출함.
+    // 순수함수라서 가능함. (어느 시점이든 순서와 상관없이 동일한 결과가 나옴.)
+    // map에 해당 하는 mapper함수와 filter에 해당하는 predi함수를 활용
+    var mi = 0;
+    var fi = 0;
+    _.go(
+      _.range(100),
+      L.map(function(val){
+        ++mi;
+        return val * val;
+      }),
+      L.filter(function(val){
+        ++fi;
+        return val %2;
+      }),
+      L.take(5),
+      console.log
+    )
+    // 종료에 해당하는 take함수를 만족할때까지만 실행 (앞에 5개)
+    console.log(mi,fi)
+
+    var mi = 0;
+    var fi = 0;
+    _.go(
+      _.range(100),
+      L.map(function(val){
+        ++mi;
+        return val * val;
+      }),
+      L.filter(function(val){
+        ++fi;
+        return val %2;
+      }),
+      L.some(function(val){
+        return val>100;
+      }),
+      console.log
+    )
+    // 종료에 해당하는 take함수를 만족할때까지만 실행 (true가 나올때까지)
+    console.log(mi,fi)
+
+    // 데이터 흐름 프로그래밍
+    // clojure , 
+  </script>
+</body>
+</html>

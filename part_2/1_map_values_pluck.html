@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>컬렉션 중심-map, values, pluck</title>
+  <script src="../js/_.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * 컬렉션 중심 프로그래밍 테스트
+     *  1. 수집하기 - map, values, plucks
+     * 
+     * 수집하기 유형의 대표함수를 이용해서 _value함수를 생성함.
+     * 내부 객체의 특정 key의 value 배열
+     * */
+
+    // values
+    console.log(
+      _map(users, function(user){
+        return user.name;
+      })
+    )
+    // object에서 value를 꺼낼때는 의미가 있음.
+
+    console.log(users[0])
+    console.log(_values(users[0]))
+    console.log(_keys(users[0]))
+
+    var a = 10;
+    console.log(_identity(a));
+    console.log(_map(_identity)(users[0]));
+
+
+    // function _pluck(data, key) {
+    //   return _map(data, function(obj){
+    //     return obj[key];
+    //   })
+    // }
+    function _pluck(data, key) {
+      return _map(data, _get(key))
+    }
+    console.log(_pluck(users, 'age')); // [33,22,11,...]
+    console.log(_pluck(users, 'name')); 
+    console.log(_pluck(users, 'id')); 
+  </script>
+</body>
+</html>

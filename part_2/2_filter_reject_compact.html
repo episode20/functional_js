@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>컬렉션 중심-map, values, pluck</title>
+  <script src="../js/_.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * 컬렉션 중심 프로그래밍 테스트
+     *  2. 거르기 - filter, reject, compact, without
+     * 거르기의 대표함수인 filter를 통해서 reject와 compact 함수 생성
+     * */
+    // filter를 통해서 조건
+    console.log(
+      _filter(users, function(user){
+        return user.age > 30;
+      })
+    )
+
+
+    console.log(
+      _reject(users, function(user){
+        return user.age > 30;
+      })
+    )
+
+
+    //  compact 함수 trudy한 값만 남김
+    console.log(
+      _compact([1,2,0,false, null, {}])
+    )
+
+  </script>
+</body>
+</html>

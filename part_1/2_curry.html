@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>함수형으로 전환 예제-커링</title>
+  <script src="../js/_.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * 
+     * 커링 함수 테스트 (_curry, _curryr)
+     *  일급함수가 지원됨.
+     *  함수가 함수를 대신 실행함.
+     *  함수가 함수를 리턴함.
+     * */
+    
+    // 1. _curry, curryr (add, sub, _get)
+    var add10 = _add(10);
+    var add5 = _add(5);
+
+    console.log(add10(5));
+    console.log(_add(5)(3));
+    console.log(add5(3));
+
+    console.log(_add(2,3))
+    console.log(_sub(2,3))
+
+    var sub10 = _sub(10);
+    console.log(sub10(5)) // 인자의 표현, 오른쪽에서 왼쪽으로 인자를 적용 _curryr
+
+    // 2. _get 만들어서 간단하게 만들기
+    var user1 = users[0];
+    console.log(_get(user1, 'name'));
+    console.log(_get('name')(user1));
+
+    var get_name = _get('name');
+    console.log(get_name(user1))
+  </script>
+</body>
+</html>

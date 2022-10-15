@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>함수형으로 전환 예제-커링</title>
+  <script src="../js/_.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * _pipe, _go 함수
+     * */
+
+    var f1 = _pipe(
+      function(a) {return a + 1;},
+      function(a) {return a * 2;},
+      function(a) {return a * a;}
+    );
+
+    console.log(f1(1))
+
+    _go(
+      1,
+      function(a) {return a + 1;},
+      function(a) {return a * 2;},
+      function(a) {return a * a;},
+      console.log
+    );
+
+    // users에 _go 적용 즉시 실행
+    _go(
+      users,
+      function(users) {
+        return _filter(users, function(user){
+          return user.age >= 30;
+        })
+      },
+      function(users) {
+        return _map(users, _get('name'));
+      },
+      console.log
+    )
+
+    console.log(
+      _map([1,2,3], function(val){ return val*2})
+    )
+
+    console.log(
+      _map(function(val){return val*2})([1,2,3])
+    )
+
+    _go(
+      users,
+      _filter(user => user.age >= 30),
+      _map(_get('name')),
+      console.log
+    )
+
+    // arrow function
+    var test = (a,b) => ({val: a + b});
+  </script>
+</body>
+</html>

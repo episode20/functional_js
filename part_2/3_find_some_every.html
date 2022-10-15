@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>컬렉션 중심-map, values, pluck</title>
+  <script src="../js/_.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * 컬렉션 중심 프로그래밍 테스트
+     *  3. 찾아내기 - find, some, every
+     * */
+
+    console.log(
+      _find(users, function(user){
+        return user.age<30;
+      })
+    )
+
+
+
+    console.log(
+      _find_index(users, function(user){
+        return user.age<30;
+      })
+    )
+
+    _go(
+      users,
+      _find(function(user){
+        return user.id == 32;
+      }),
+      _get('name'),
+      console.log
+    )
+    
+
+    console.log(_some([1,2,5,10,20], function(val){
+      return val > 20;
+    }))
+    console.log(_some([1,2,5,10,20], function(val){
+      return val > 10;
+    }))
+
+
+
+    console.log(_every([1,2,5,10,20], function(val){
+      return val > 10;
+    }))
+    console.log(_every([12,24,5,10,20], function(val){
+      return val > 3;
+    }))
+    
+    console.log(
+      _some([1,2,0,10])
+    )
+    console.log(
+      _every([false, null, 0])
+    )
+
+
+    console.log(
+      _some(users, function(user){
+        return user.age < 20;
+      })
+    )
+  </script>
+</body>
+</html>
